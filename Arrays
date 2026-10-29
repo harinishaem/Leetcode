@@ -1,0 +1,69 @@
+1929. Concatenation of Array
+Naive
+:initialize n with size of num
+:Create a vector with twice the size of n
+:FOR i=0 to n
+:Add n elements to ans in ans[i]
+:A i+n elements to ans in ans[i+n] as concatenation alternatively
+:Return ans
+
+Time : O(n), Space: O(n)
+
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> getConcatenation(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> ans(2 * n);
+        for(int i = 0; i < n; i++){
+            ans[i] = nums[i];
+            ans[i + n] = nums[i];
+        }
+        return ans;
+    }
+};
+
+
+Optimized: with insert() pre-initializing with num value
+:initialize the vector and double the size and initialize with the data of the nums
+:use insert(position, start, end) to move the vector into the existing ans with having nums values
+:Return ans
+
+Time : O(n), Space: O(n)
+
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> getConcatenation(vector<int>& nums) {
+        vector<int> ans(nums);
+        ans.reserve(2 * nums.size());
+        ans.insert(ans.end(), nums.begin(), nums.end());
+        return ans;
+    }
+};
+
+
+Optimized: with insert() 
+:initialize the vector and reserve double the memory size for it
+:use insert(position, start, end) to move the vector two times to move it
+:Return ans
+
+Time : O(n), Space: O(n)
+
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> getConcatenation(vector<int>& nums) {
+        vector<int> ans;
+        ans.reserve(2 * nums.size());
+        ans.insert(ans.end(), nums.begin(), nums.end());
+        ans.insert(ans.end(), nums.begin(), nums.end());
+        return ans;
+    }
+};
